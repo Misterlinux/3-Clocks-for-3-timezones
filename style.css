@@ -1,0 +1,1012 @@
+
+/*this is the american internal clock */
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+
+/*for the ukranian clock upper text city*/
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+/*numbers on ukranian clock*/
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/* for the date o ukranian clock*/
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&display=swap');
+
+/* for the time entry*/
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
+.intro{
+  background: linear-gradient(
+    to right, 
+    hsla(248, 39%, 55%), 
+    hsl(248, 39%, 39%), 
+    hsla(248, 39%, 20%) );
+
+  padding: 1em;
+  text-align: center;
+  font-family: 'Secular One', sans-serif;
+  color: white;
+
+}
+
+.title{
+    font-size: 55px;
+}
+
+.author{
+  font-size: 15px;
+}
+
+.author a{
+  color: lightcoral;
+}
+
+.author a:hover{
+  color: #d7aba3;
+}
+
+
+.paper{
+  margin: auto;
+
+  width: 285px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: white;
+  border: 1px solid black;
+
+  margin-bottom: 2em;
+
+
+  box-shadow: inset -3px 6px 7px rgba(0,0,0,.4);
+}
+
+.paper div{
+  font-size: 14px;
+  padding: 0.55em;
+  font-family: 'Secular One', sans-serif;
+
+}
+
+.paper .ukraine{
+  font-size: 13px;
+}
+
+/* ------------------------ */
+
+/* we need relative to position absolute the children */
+.wheel{
+  position: relative;
+  height: 300px;
+  width: 300px;
+
+  margin: 50px auto 35px auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* having different layers that share same space we need absolute (100%)
+filters are needed for the grany effect, and the 8% is to leave
+the center star space*/
+.grany{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+
+  background: 
+    radial-gradient(
+        hsla(353, 68%, 42%, 1) 8%,
+        transparent 45%,
+        hsla(353, 68%, 42%, 1) 58%),
+    url(https://grainy-gradients.vercel.app/noise.svg);
+
+  filter: contrast(250%) brightness(400%) ;
+  position: absolute;
+
+  z-index: -2;
+}
+/*we gave grany its own selector to use the justify center flex*/
+.numbers{
+  display: grid;
+  grid-template-areas:
+    ". . . . . n12 . . . . ."
+    ". . n11 . . . . . n1 . ."
+    ". n10 . . . . . . . n2 ."
+    "n9 . . . . . . . . . n3"
+    ". n8 . . . . . . . n4 ."
+    ". . n7 . . . . . n5 . ."
+    ". . . . . n6 . . . . .";
+
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+/*we need to center/align each grid element*/
+.number{
+  font-size: 1.1em;
+  color: hsla(241, 26%, 31%, 1);
+  font-weight: bold;
+
+  font-family: 'Fugaz One', cursive;
+
+  align-self: center;
+  justify-self: center;  
+
+  filter: contrast(25%) brightness(72%);
+}
+
+.hour1{
+  grid-area: n1;
+  justify-self: end;
+  align-self: start;
+}
+
+.hour2{
+  grid-area: n2;
+  justify-self: end;
+  align-self: start;
+}
+
+.hour3{
+  grid-area: n3;
+  justify-self: start;
+}
+
+.hour4{
+  grid-area: n4;
+  justify-self: end;
+  align-self: end;
+}
+
+.hour5{
+  grid-area: n5;
+  justify-self: end;
+  align-self: end;
+}
+
+.hour6{
+  grid-area: n6;
+  align-self: start;
+}
+
+.hour7{
+  grid-area: n7;
+  justify-self: start;
+  align-self: end;
+}
+
+.hour8{
+  grid-area: n8;
+  justify-self: start;
+  align-self: end;
+}
+
+.hour9{
+  grid-area: n9;
+  justify-self: end;
+}
+
+.hour10{
+  grid-area: n10;
+  justify-self: start;
+  align-self: start;
+}
+
+.hour11{
+  grid-area: n11;
+  justify-self: start;
+  align-self: start;
+}
+
+.hour12{
+  grid-area: n12;
+  align-self: end;
+}
+
+/* we need the estra transparent % for the second radient on wheel */
+.nucleus{
+  position: absolute;
+  margin: auto auto;
+
+  background: radial-gradient( 
+      rgba(0, 0, 255, 1) 33%, 
+      rgba(255, 0, 0, 0.1) 110% , 
+      transparent 1% ),
+  url(https://grainy-gradients.vercel.app/noise.svg);
+
+  filter: contrast(150%) brightness(500%) ;
+
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -2;
+}
+
+/*clip goes trought X/Y, like a trangle (33, 0) (50, 50) (66,0) */
+.star{
+  width: 50px;
+  height: 50px;
+
+  background: url(https://grainy-gradients.vercel.app/noise.svg);
+
+  clip-path: polygon(
+      50% 0%, 
+      61% 35%, 
+      98% 35%, 
+      68% 57%,
+      79% 91%, 
+      50% 70%, 
+      21% 91%, 
+      32% 57%, 
+      2% 35%, 
+      39% 35%
+  );
+}
+
+/* now for the metal effect */
+.captain{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 300px;
+  height: 300px;
+
+  border-radius: 50%;
+  background: 
+    conic-gradient(
+      hsla(353, 68%, 42%, 1), hsla(353, 68%, 27%, 1), hsla(353, 68%, 20%, 1), 
+      hsla(353, 68%, 54%, 1), hsla(353, 68%, 57%, 1),
+  
+      hsla(353, 68%, 42%, 1),
+      hsla(353, 68%, 67%, 1), hsla(353, 68%, 54%, 1), hsla(353, 68%, 57%, 1),
+  
+      hsla(353, 68%, 42%, 1), hsla(353, 68%, 27%, 1), hsla(353, 68%, 20%, 1), 
+      hsla(353, 68%, 54%, 1), hsla(353, 68%, 57%, 1),
+  
+      hsla(353, 68%, 42%, 1),
+      hsla(353, 68%, 67%, 1), hsla(353, 68%, 54%, 1), hsla(353, 68%, 57%, 1),
+  
+      hsla(353, 68%, 42%, 1)
+  );
+
+  clip-path: polygon(
+      0 0,
+      0 100%,
+      100% 100%,
+      100% 0,
+      58% 0,
+      50% 50%,
+      28% 0 
+  );
+  z-index: 10;
+}
+
+.captain::before{
+  content: "";
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: 
+    conic-gradient( 
+      #b5b5b5, #8d8d8d, #838383, 
+      #d7d7d7, #dddddd, 
+      
+      #b5b5b5, 
+      #ababab, #d7d7d7, #dddddd, 
+      
+      #b5b5b5, 
+      #8d8d8d, #838383, #d7d7d7, 
+      
+      #dddddd, #b5b5b5, #ababab, 
+      #d7d7d7, #dddddd, 
+      
+      #b5b5b5 );
+}
+
+.blue{
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+
+  background: 
+    conic-gradient(
+      hsla(353, 68%, 42%, 1), hsla(353, 68%, 27%, 1), hsla(353, 68%, 20%, 1), 
+      hsla(353, 68%, 54%, 1), hsla(353, 68%, 57%, 1),
+
+      hsla(353, 68%, 42%, 1),
+      hsla(353, 68%, 67%, 1), hsla(353, 68%, 54%, 1), hsla(353, 68%, 57%, 1),
+
+      hsla(353, 68%, 42%, 1), hsla(353, 68%, 27%, 1), hsla(353, 68%, 20%, 1), 
+      hsla(353, 68%, 54%, 1), hsla(353, 68%, 57%, 1),
+
+      hsla(353, 68%, 42%, 1),
+      hsla(353, 68%, 67%, 1), hsla(353, 68%, 54%, 1), hsla(353, 68%, 57%, 1),
+
+      hsla(353, 68%, 42%, 1)
+    );
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* we used before to have multiple conic backrounds */
+.blue::before{
+  content: "";
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: 
+
+  conic-gradient(
+    hsla(241, 26%, 31%, 1), hsla(241, 26%, 16%, 1), hsla(241, 26%, 12%, 1), 
+    hsla(241, 26%, 44%, 1), hsla(241, 26%, 47%, 1),
+
+    hsla(241, 26%, 31%, 1),
+    hsla(241, 26%, 27%, 1), hsla(241, 26%, 44%, 1), hsla(241, 26%, 47%, 1),
+
+    hsla(241, 26%, 31%, 1), hsla(241, 26%, 16%, 1), hsla(241, 26%, 12%, 1), 
+    hsla(241, 26%, 44%, 1), hsla(241, 26%, 47%, 1),
+
+    hsla(241, 26%, 31%, 1), 
+    hsla(241, 26%, 27%, 1), hsla(241, 26%, 44%, 1), hsla(241, 26%, 47%, 1),
+
+    hsla(241, 26%, 31%, 1)
+  );
+
+  display: flex;
+  position: absolute;    
+}
+
+.shiny{
+  width: 65px;
+  height: 65px;
+
+  background: 
+    conic-gradient(
+      #b5b5b5, #8d8d8d, #838383, 
+      #d7d7d7, #dddddd,
+
+      #b5b5b5,
+      #ababab, #d7d7d7, #dddddd,
+
+      #b5b5b5, #8d8d8d, #838383, 
+      #d7d7d7, #dddddd,
+
+      #b5b5b5, 
+      #ababab, #d7d7d7, #dddddd,
+
+      #b5b5b5
+    );
+  
+  position: absolute;
+
+  clip-path: polygon(
+      50% 0%, 
+      61% 35%, 
+      98% 35%, 
+      68% 57%,
+      79% 91%, 
+      50% 70%, 
+      21% 91%, 
+      32% 57%, 
+      2% 35%, 
+      39% 35%
+  );
+}
+
+/* we get a center without width, asolute to be centered */
+.centerclock{
+  box-shadow: 0 0.1rem 1rem 0.1rem #212121;
+
+  border-radius: 50%;
+  position: absolute;
+  z-index: 12;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centerclock::before{
+  content: "";
+  position: absolute;
+  height: 0.5em;
+  width: 0.5em;
+
+  border-radius: 50%;
+  background-color: hsla(241, 26%, 31%, 0.7);
+  z-index: 15;
+}
+
+/*we rotate from the center,  */
+.arm_hour{
+  position: absolute;
+
+  height: 5em;
+  width: 0.32em;
+
+  border-radius: 0.8em;
+  background-color: hsla(360, 100%, 100%, 0.75);
+  /* box-shadow: 0 0.1rem 1rem 0.1rem #0e0e0e; */
+  z-index: -4;
+
+  transform-origin: center;
+}
+
+.arm_minute{
+  position: absolute;
+
+  height: 10em;
+  width: 0.3em;
+
+  border-radius: 0.15em;
+
+  background-color:hsla(353, 68%, 42%, 0.8);
+  z-index: -5;
+
+  transform-origin: center;
+}
+
+.captain {
+  animation: rotate-seconds 60s linear infinite;
+}
+
+.arm_minute{
+  animation: rotate-minutes 3600s linear infinite;
+}
+
+/*we need to include both rotate and translate in the same tranform*/
+.arm_hour {
+  animation: rotate-hours 43200s infinite linear;
+}
+
+@keyframes rotate-seconds{
+  to {
+    transform: rotate( 360deg) ;
+  }
+}
+
+@keyframes rotate-minutes {
+  from{
+    transform: rotate( 0deg) translateY(-2em);
+  }
+  to {
+    transform: rotate( 360deg) translateY(-2em);
+  }
+}
+
+@keyframes rotate-hours {
+  from {
+    transform: rotate( 0deg) translateY(-1em);
+  }
+  to {
+    transform: rotate( 360deg) translateY(-1em);
+
+  }
+}
+
+
+/* -------------  ---------------  -----------  ---------------  ----------- */
+
+/*the parent flex will center the children */
+.orologio{
+  border: 10PX solid rgb( 205,33,42 );
+  background-color: rgb( 244,249,255 ) ;
+  border-radius: 50%;
+
+  margin: 50px auto 35px auto;
+
+  width: 300px;
+  height: 300px;
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* this is for the hour numbers on clock*/
+.orologio div.meta{
+  position: absolute;
+  font-size: 20px;
+  color: darkred;
+}
+
+.orologio div.meta:nth-child(1){
+  top: 0%;
+  right: calc(50% - 10px);
+
+  margin-top: 10px;
+}
+
+.orologio div.meta:nth-child(2){
+  top: calc(50% - 16px);
+  right: 0%;
+
+  margin-right: 12px;
+}
+
+.orologio div.meta:nth-child(3){
+  bottom: 0%;
+  right: calc(50% - 5px);
+
+  margin-bottom: 10px;
+}
+
+.orologio div.meta:nth-child(4){
+  top: calc(50% - 16px);
+  left: 1%;
+
+  margin-left: 12px;
+}
+
+.centro{
+  position: absolute;
+  width: 2em;
+  height: 2em;
+
+  background-color: rgb( 205,33,42 ) ;
+  border-radius: 50%;
+  box-shadow: 0 0.1rem 1rem 0.1rem #212121;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centro::before{
+  content: "";
+  position: absolute;
+  height: 0.4rem;
+  width: 0.4rem;
+
+  border-radius: 50%;
+  background-color: orange ;
+  z-index: 2;
+}
+
+.centro::after{
+  content: "";
+  position: absolute;
+  height: 1.1rem;
+  width: 1.1rem;
+
+  border-radius: 50%;
+  background-color: rgb(0, 140, 69) ;
+  z-index: 1;
+}
+
+/*we can create triangles using borders, with a border and height being equal */
+.centro_ora{
+  position: absolute;
+  height: 80px;
+
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 80px solid rgb( 205,33,42 );
+  border-radius: 10px;
+
+  z-index: 0;
+
+  transform-origin: center;
+}
+
+.centro_minuto{
+  position: absolute;
+  height: 120px;
+
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 120px solid rgb( 0, 140, 69 );
+  border-radius: 10px;
+
+  z-index: 0;
+
+  transform-origin: center;
+}
+
+/*Transition-timing-function goes AFTER transition declaration */
+.centro_secondo{
+  position: absolute;
+  height: 140px;
+
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 140px solid orange;
+  border-radius: 10px;
+
+  transition: 1s;
+  transition-timing-function: cubic-bezier(0.1, 2.5, 1, 0.8);
+
+  transform-origin: center;
+  z-index: 0;
+}
+
+/*we just use a margin being it already centered */
+.digitale{
+  width: 30%;
+  height: 15px;
+  padding: 5px;
+
+  margin-top: 175px;
+
+  background-color: wheat;
+
+  font-size: 13px;
+  line-height: 5px;
+  text-align: center;
+
+  box-shadow: inset -1px 5px 7px rgba(0,0,0,.4);
+}
+
+.digitale span{
+  color:red;
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+/* needs absolute to fit with the other chidren elements */
+.asse{
+  width: 2em;
+  height: 165px;
+  background-color: rgb(116, 13, 13);
+  z-index: -2;
+
+  transform-origin: top;
+  bottom: -10%;
+
+  position: absolute;
+  animation: nord 1s alternate-reverse infinite;
+}
+
+/*thsi is the cimney shaped on top */
+.asse::before{
+  content: "";
+
+  position: absolute;
+  bottom: -24%;
+  left: -21%;
+
+  border-top: 19px solid rgb(116, 13, 13);
+  border-right: 20px solid rgb(116, 13, 13);
+  border-bottom: 29px solid rgb(116, 13, 13);
+  border-left: 24px solid transparent;
+
+  border-radius: 45%;
+}
+
+/*we move the children using margin on the parent */
+.fumo{
+  position: relative;
+  display: flex;
+  justify-content: end;
+
+  margin-right: 6px;
+
+  top: 102%;
+}
+
+/*a list with absolute will have all elmenets in same point*/
+.fumo li{
+  position: absolute;
+  list-style: none;
+
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: rgba(179, 179, 179, 0.6);
+}
+
+/*we animate different smokeballs in different directions*/
+.fumo li:nth-child(even){
+  animation: fuceven 1s linear infinite;
+}
+
+.fumo li:nth-child(odd){
+  animation: fucodd 1s linear infinite;
+}
+
+/*delay added to create a stream, includin a fixed one*/
+.fumo li:nth-child(1){
+  animation-delay: 0.2s;
+}
+.fumo li:nth-child(2){
+  animation-delay: 0.3s;
+}
+.fumo li:nth-child(3){
+  animation-delay: 0.4s;
+}
+.fumo li:nth-child(4){
+  animation-delay: 0.8s;
+}
+.fumo li:nth-child(5){
+  animation: none;
+  filter: blur(15px);
+}
+
+/* position (0,0) will make the absolute list start in the same position */
+@keyframes fuceven {
+  0%{
+      transform: translate(0,0) scale(1);
+      opacity: 1;
+      filter: blur(5px);
+  }
+  100%{
+      transform: translate( 150px, 20px) scale(3);
+      opacity: 0;
+      filter: blur(10px);
+  }
+}
+
+@keyframes fucodd{
+  0%{
+      transform: translate(0,0) scale(1);
+      opacity: 1;
+      filter: blur(5px);
+  }
+  100%{
+      transform: translate( 150px, -20px) scale(3);
+      opacity: 0;
+      filter: blur(10px);
+  }
+}
+
+/* we copy the width/heiht of the container and move it using the box-shadow,
+alternative reverse to have the swinging movement*/
+.pendolo{
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  box-shadow: 0px -15px 0px 0px rgb(116, 13, 13); 
+
+  position: absolute;
+  animation: nord 1s alternate-reverse infinite;
+}
+
+@keyframes nord{
+  from {
+      transform: rotate(140deg);
+  }
+  to {
+      transform: rotate(220deg);
+  }
+}
+
+/*we create the maerche> punto using javascript */
+.punto{
+    width: 4px;
+    height: 50%;
+
+    top: 0%;
+    left: calc(50% - 2px);
+
+    border-top: 8px solid red;
+    transform-origin: bottom;
+    position: absolute;
+}
+
+.punto:nth-of-type(5n){
+    width: 6px;
+    height: 50%;
+
+    top: 0px;
+    left: calc(50% - 3px);
+
+    border-top: 12px solid green;
+    z-index: 5;
+}
+
+/* -------------------- -------------------- ---------------- -------*/
+
+.contenitore{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 50px auto 35px auto;
+}
+
+.sveglia{
+  width: 300px;
+  height: 300px;
+
+  position: relative;
+
+  background-color: hsla(212, 100%, 14.5%, 1);
+  border: 15px solid hsla(52, 100%, 50%, 1);
+  border-radius: 8%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: -225px;
+  color:  yellow;
+
+  position: absolute;
+  width: 100%;
+}
+
+.upper .city{
+  font-family: 'Audiowide', cursive;
+  text-shadow: 1px 0px 5px hsla(52, 100%, 65%, 1);
+
+  font-size: 25px;
+  margin: auto 10px;
+}
+
+.milliseconds{
+  width: 28px;
+  height: 28px;
+
+  border: 4px solid hsla(52, 100%, 50%, 1);
+  box-shadow: 0px 0px 10px 2px hsla(52, 100%, 65%, 1);
+
+  border-radius: 50%;
+  margin: auto 5px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.milliseconds .arm{
+  height: 50%;
+  width: 0.2em;
+  background-color: hsla(52, 100%, 50%, 1);
+  box-shadow: 1px 0px 10px 1.5px hsla(52, 100%, 65%, 1);
+
+  transform-origin: bottom;
+  animation: cuj 1s linear infinite;
+}
+
+@keyframes cuj {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+.clock{
+  position: absolute;
+  margin-top: -35px;
+  display: flex;
+  justify-content: center;
+
+  color: white;
+  font-size: 4.4em;
+}
+
+/* WE MIHT NEED TO CHECK HOW TO USE ABOLLUT + RIGHT/LEFT AND RELATIVE/ marin right*/
+.tabula{
+  height: 2em;
+  background-color: hsla(212, 100%, 14.5%, 1);
+  color: rgb(254 221 0);
+
+  line-height: 2.1em;
+
+  display: flex;
+  /*position: relative; */
+  overflow: hidden;
+}
+
+.tabula > div{
+  display: flex;
+}
+
+.tabula div div div{
+  width: 40px;
+  height: 1.48em;
+
+  font-size: 95px;
+
+  font-family: 'Bebas Neue', cursive;
+
+  text-align: center;
+
+  color: rgb(254 221 0);
+  background-color: hsla(212, 100%, 14.5%, 1);
+  text-shadow: 0px 0px 4px hsla(52, 100%, 65%, 1);
+  border: 1px solid rgb(254 221 0);
+}
+
+/* :before:after needing absolute to be on same layer,also bottom */
+.tabula::before, .tabula::after{
+  content: '';
+  width: 100%;
+  height: 0.22em;
+  background: linear-gradient(to top, transparent, hsla(52, 100%, 65%, 0.55) );
+  position: absolute;
+  z-index: 2;
+}
+
+.tabula::after{
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent, hsla(52, 100%, 65%, 0.55) );
+}
+
+.move {
+  animation: move linear 1s infinite;
+}
+
+@keyframes move {
+  from {
+    transform: translateY(0em);
+  }
+  to {
+    transform: translateY(-2.1em);
+  }
+}
+
+/* --------------- */
+
+.time{
+  width: 101%;
+
+  bottom: 0;
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid rgb(254 221 0);
+
+  border-radius: 2%;
+  box-sizing: border-box;
+}
+
+.time div{
+  width: 35.5%;
+  height: 65px;
+  background-color: hsla(212, 100%, 14.5%, 1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.35em;
+  color: rgb(254 221 0);
+  box-shadow: inset 0px 3px 10px 0px hsla(52, 100%, 65%, 1);
+
+  text-shadow: 1px 0px 5px hsla(52, 100%, 65%, 1);
+
+  font-family: 'Aldrich', sans-serif;
+}
+
+.time .giorno{
+  width: 30%;
+}
+
+.time .anno{
+  width: 35%;
+}
+
+.time .data{
+  border-left: 2px solid rgb(254 221 0);
+  border-right: 2px solid rgb(254 221 0);
+}
